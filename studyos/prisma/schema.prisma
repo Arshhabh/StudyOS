@@ -1,0 +1,171 @@
+// Apply the SQL migrations to install Supabase policies, Auth foreign keys and RPCs.
+model AssistantUsage {
+  userId String @id @map("user_id") @db.Uuid
+  windowStart DateTime @map("window_start") @db.Timestamptz(6)
+  requests Int
+  @@map("assistant_usage")
+}
+
+generator client {
+ provider = "prisma-client-js"
+}
+
+datasource db {
+ provider = "postgresql"
+ url = env("DATABASE_URL")
+}
+
+model UserProfile {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("users")
+}
+
+model Assignment {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("assignments")
+}
+
+model Exam {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("exams")
+}
+
+model Task {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("tasks")
+}
+
+model Habit {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("habits")
+}
+
+model HabitLog {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("habit_logs")
+}
+
+model PomodoroSession {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("pomodoro_sessions")
+}
+
+model StudySession {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("study_sessions")
+}
+
+model Note {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("notes")
+}
+
+model Goal {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("goals")
+}
+
+model CalendarEvent {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("calendar_events")
+}
+
+model Notification {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("notifications")
+}
+
+model Subject {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("subjects")
+}
+
+model AttendanceRecord {
+  id        String   @id @db.Uuid
+  userId    String   @default(dbgenerated("auth.uid()")) @map("user_id") @db.Uuid
+  payload   Json     @db.JsonB
+  syncSeq   BigInt   @default(dbgenerated("nextval('study_change_sequence'::regclass)")) @map("sync_seq")
+  version   Int      @default(1)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("attendance_records")
+}
+

@@ -1,0 +1,5 @@
+project_id = "studyos"
+
+[functions.study-assistant]
+verify_jwt = true
+
